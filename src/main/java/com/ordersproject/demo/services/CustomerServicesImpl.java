@@ -2,6 +2,7 @@ package com.ordersproject.demo.services;
 
 import com.ordersproject.demo.models.Customer;
 import com.ordersproject.demo.repositories.CustomersRepository;
+import com.ordersproject.demo.views.OrderCounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,11 @@ public class CustomerServicesImpl implements CustomerServices {
         List<Customer> custList = new ArrayList<>();
         customerrepos.findByCustnameContainingIgnoringCase(name).iterator().forEachRemaining(custList::add);
         return custList;
+    }
+
+    @Override
+    public List<OrderCounts> getOrderCounts() {
+        return null;
     }
 
     @Override

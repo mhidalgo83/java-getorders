@@ -2,6 +2,7 @@ package com.ordersproject.demo.controllers;
 
 import com.ordersproject.demo.models.Customer;
 import com.ordersproject.demo.services.CustomerServices;
+import com.ordersproject.demo.views.OrderCounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class CustomerController {
 
     // http://customer/orders/count
     @GetMapping(value = "/orders/count", produces = "application/json")
-    public ResponseEntity<?> findOrdersByCustomer() {
+    public ResponseEntity<?> findOrderCounts() {
         List<OrderCounts> orderList = customerServices.getOrderCounts();
         return new ResponseEntity<>(orderList, HttpStatus.OK);
     }
