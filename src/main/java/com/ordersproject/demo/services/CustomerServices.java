@@ -1,7 +1,7 @@
 package com.ordersproject.demo.services;
 
 import com.ordersproject.demo.models.Customer;
-import com.ordersproject.demo.views.OrderCounts;
+import com.ordersproject.demo.views.OrderCount;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface CustomerServices {
 
     List<Customer> findCustomersWithName(String name);
 
-    List<OrderCounts> getOrderCounts();
+    List<OrderCount> getOrderCount();
 
     Customer save(Customer customer);
 }
