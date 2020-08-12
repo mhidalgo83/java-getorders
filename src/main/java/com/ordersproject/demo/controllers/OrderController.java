@@ -1,14 +1,17 @@
 package com.ordersproject.demo.controllers;
 
+import com.ordersproject.demo.models.Customer;
 import com.ordersproject.demo.models.Order;
 import com.ordersproject.demo.services.OrderServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/orders")
@@ -24,4 +27,19 @@ public class OrderController {
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
+    // POST
+    // http://localhost:2019/orders/order
+    @PostMapping(value = "/order", consumes = "application/json")
+    public ResponseEntity<?> addOrder(@Valid @RequestBody Order order) {
+        order.setOrdnum(0);
+        order = orderServices.save(order);
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI orderURI = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                .path("/" + order.getOrdnum())
+                .build()
+                .toUri();
+        responseHeaders.setLocation(orderURI);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+    }
 }
