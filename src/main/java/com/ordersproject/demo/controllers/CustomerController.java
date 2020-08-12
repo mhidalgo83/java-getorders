@@ -88,4 +88,12 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //DELETE
+    // http://localhost:2019/customers/customer/{custcode}
+    @DeleteMapping(value = "/customer/{custcode}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable long custcode) {
+        customerServices.delete(custcode);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
